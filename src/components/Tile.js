@@ -3,6 +3,17 @@ import { useState } from 'react'
 export default function Tile({value}) {
 const [show, setShow] = useState(false)
 
+    function changeAlliance(string) {
+        if(string === 'ST'){
+            return 'Sky Team'
+        } else if (string === 'OW'){
+            return 'Oneworld'
+        } else if (string === 'SA'){
+            return 'Star Alliance'
+        } else {
+            return ''
+        }
+    }
 
     function getURL(string) {    
         let url = string.replace(/https:\/\//g, "")
@@ -17,8 +28,8 @@ const [show, setShow] = useState(false)
             <div>
                 <img src={`http://kayak.com${value.logoURL}`} alt={`${value.name} logo`} />
                 <div>
-                    <h2>{value.name}</h2>
-                    {show && <h3>{value.alliance}</h3>}
+                    <h2 className={show ? 'airline-name-hover' : 'airline-name-normal' }>{value.name}</h2>
+                    {show && <h3>{changeAlliance(value.alliance)}</h3>}
                     {show && <h4>{value.phone}</h4>}
                     {show && <h5>{getURL(value.site)}</h5>}
                 </div>

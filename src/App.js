@@ -33,9 +33,6 @@ function App() {
     } 
   }, [oneWorld, skyTeam, startAlliance])
 
-
-  console.log(filterTiles)
-
   return (
     <div className="App">
       <header>

@@ -41,6 +41,7 @@ main h1 {
     width: 20px;
     height: 20px;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .tiles {
@@ -73,11 +74,18 @@ main h1 {
 }
 
 .tile div img {
-    width: 40px;
+    width: 32px;
+    height: 32px;
     margin-right: 18px;
 }
 
-.tile h2 {
+.airline-name-normal {
+    font-size: 16px;
+    font-weight: bold;
+    color: #192024;
+}
+
+.airline-name-hover {
     font-size: 14px;
     font-weight: bold;
     color: #192024;
@@ -102,5 +110,5 @@ main h1 {
 }
 
 .tile h1,h2,h3,h4 {
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 }
