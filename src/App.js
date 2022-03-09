@@ -41,7 +41,6 @@ function App() {
 
       <main>
         <h1>Airlines</h1>
-
         <div className='filters'>
           <h2>Filter by Alliances</h2>
 
@@ -59,8 +58,7 @@ function App() {
           {filterTiles && filterTiles.map((value, index) => {
             return <Tile key={index} value={value}/>
           })}
-        </ul>
-      
+        </ul>  
       </main>
     </div>
   );

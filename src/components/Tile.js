@@ -23,6 +23,7 @@ const [show, setShow] = useState(false)
         url = new URL(url)
         return url.hostname    
     }
+
     return (
         <div className="tile" onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)} >   
             <div>
@@ -32,8 +33,7 @@ const [show, setShow] = useState(false)
                     {show && <h3>{changeAlliance(value.alliance)}</h3>}
                     {show && <h4>{value.phone}</h4>}
                     {show && <h5>{getURL(value.site)}</h5>}
-                </div>
-                
+                </div>            
             </div>  
         </div>
     )
