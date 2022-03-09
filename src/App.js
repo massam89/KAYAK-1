@@ -14,25 +14,27 @@ function App() {
   useEffect(()=>{
     jsonp('https://www.kayak.com/h/mobileapis/directory/airlines/homework', {param: 'jsonp'}, (err, data) => {
       if(err){console.log(err)}
-      else { setTiles(data) }
+      else { setTiles(data); setFilterTiles(data) }
     })
     }, [])
 
-    useEffect(() => {
+  useEffect(() => {
     
-        let testtest = []
+    if (!oneWorld && !skyTeam && !startAlliance){
+      setFilterTiles(tiles)
+    } else {
+      let myTile = []
 
-        if(oneWorld) {testtest.push(...tiles.filter(item => item.alliance === 'OW'))}
-        if(skyTeam) {testtest.push(...tiles.filter(item => item.alliance === 'ST'))}
-        if(startAlliance) {testtest.push(...tiles.filter(item => item.alliance === 'SA'))}
+      if(oneWorld) {myTile.push(...tiles.filter(item => item.alliance === 'OW'))}
+      if(skyTeam) {myTile.push(...tiles.filter(item => item.alliance === 'ST'))}
+      if(startAlliance) {myTile.push(...tiles.filter(item => item.alliance === 'SA'))}
 
-        if (!oneWorld && !skyTeam && !startAlliance){
-          setFilterTiles(tiles)
-        }else {
-          setFilterTiles(testtest)
-        }
-    
-    }, [oneWorld, skyTeam, startAlliance])
+      setFilterTiles(myTile)
+    } 
+  }, [oneWorld, skyTeam, startAlliance])
+
+
+  console.log(filterTiles)
 
   return (
     <div className="App">
@@ -55,15 +57,13 @@ function App() {
           <input type="checkbox" id='startAlliance' onChange={() => setStartAlliance(!startAlliance)} />
           <label htmlFor="startAlliance">Start Alliance</label>    
         </div>
-
-        
+    
         <ul className='tiles'>
           {filterTiles && filterTiles.map((value, index) => {
             return <Tile key={index} value={value}/>
           })}
         </ul>
-        
-
+      
       </main>
     </div>
   );
