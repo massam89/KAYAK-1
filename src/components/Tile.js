@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 export default function Tile({value}) {
-
+const [show, setShow] = useState(false)
 
 
     function getURL(string) {    
@@ -13,14 +13,14 @@ export default function Tile({value}) {
         return url.hostname    
     }
     return (
-        <div className="tile">   
+        <div className="tile" onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)} >   
             <div>
                 <img src={`http://kayak.com${value.logoURL}`} alt={`${value.name} logo`} />
                 <div>
                     <h2>{value.name}</h2>
-                    <h3>{value.alliance}</h3>
-                    <h4>{value.phone}</h4>
-                    <h5>{getURL(value.site)}</h5>
+                    {show && <h3>{value.alliance}</h3>}
+                    {show && <h4>{value.phone}</h4>}
+                    {show && <h5>{getURL(value.site)}</h5>}
                 </div>
                 
             </div>  
