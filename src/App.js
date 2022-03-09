@@ -6,6 +6,10 @@ import Tile from './components/Tile'
 function App() {
 
   const [tiles, setTiles] = useState();
+  const [filterTiles, setFilterTiles] = useState([])
+  const [oneWorld, setOneWorld] = useState(false)
+  const [skyTeam, setSkyTeam] = useState(false)
+  const [startAlliance, setStartAlliance] = useState(false)
 
   useEffect(()=>{
     jsonp('https://www.kayak.com/h/mobileapis/directory/airlines/homework', {param: 'jsonp'}, (err, data) => {
@@ -14,7 +18,21 @@ function App() {
     })
     }, [])
 
-    console.log(tiles)
+    useEffect(() => {
+    
+        let testtest = []
+
+        if(oneWorld) {testtest.push(...tiles.filter(item => item.alliance === 'OW'))}
+        if(skyTeam) {testtest.push(...tiles.filter(item => item.alliance === 'ST'))}
+        if(startAlliance) {testtest.push(...tiles.filter(item => item.alliance === 'SA'))}
+
+        if (!oneWorld && !skyTeam && !startAlliance){
+          setFilterTiles(tiles)
+        }else {
+          setFilterTiles(testtest)
+        }
+    
+    }, [oneWorld, skyTeam, startAlliance])
 
   return (
     <div className="App">
@@ -28,19 +46,19 @@ function App() {
         <div className='filters'>
           <h2>Filter by Alliances</h2>
 
-          <input type="checkbox" id='oneworld' />
+          <input type="checkbox" id='oneworld' onChange={() => setOneWorld(!oneWorld)} />
           <label htmlFor="oneworld">Oneworld</label>
 
-          <input type="checkbox" id='skyTeam' />
+          <input type="checkbox" id='skyTeam' onChange={() => setSkyTeam(!skyTeam)} />
           <label htmlFor="skyTeam">Sky Team</label>
 
-          <input type="checkbox" id='startAlliance' />
+          <input type="checkbox" id='startAlliance' onChange={() => setStartAlliance(!startAlliance)} />
           <label htmlFor="startAlliance">Start Alliance</label>    
         </div>
 
         
         <ul className='tiles'>
-          {tiles && tiles.map((value, index) => {
+          {filterTiles && filterTiles.map((value, index) => {
             return <Tile key={index} value={value}/>
           })}
         </ul>
