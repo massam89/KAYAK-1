@@ -31,7 +31,7 @@ function App() {
 
       setFilterTiles(myTile)
     } 
-  }, [oneWorld, skyTeam, startAlliance])
+  }, [oneWorld, skyTeam, startAlliance, tiles])
 
   return (
     <div className="App">
